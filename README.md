@@ -5,7 +5,9 @@ Use raspberry pi for controlling lego power function models using any programmin
 
  * raspberry pi 3
  * raspberry pi camera (optional but a very good extensions for autonomous robotics)
- * motor controller: https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi
+ * motor controller:
+    * https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi
+    * https://www.adafruit.com/product/2348      
  * lego power function extension cable: https://shop.lego.com/de-DE/LEGO-Power-Functions-Verl%C3%A4ngerungskabel-8886
  * 5V UBEC for powering raspberry from lego battery pack: https://www.adafruit.com/product/1385
 
