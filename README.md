@@ -15,7 +15,7 @@ Use raspberry pi for controlling lego power function models using any programmin
  * write image to SD card
  * place WIFI pre configuration file before first boot /boot/wpa_supplicant.conf:
 
-  '''
+  ```
   country=US
   update_config=1
   ctrl_interface=/var/run/wpa_supplicant
@@ -24,5 +24,5 @@ Use raspberry pi for controlling lego power function models using any programmin
     ssid="your ssid"
     psk="your pre shared key"
   }
-  '''
+  ```
  * place empty SSH file in /boot/ssh to enable ssh after boot
