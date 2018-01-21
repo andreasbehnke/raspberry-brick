@@ -1,0 +1,24 @@
+---
+
+  - name: load i2c module at boot time
+    become: yes
+    lineinfile: path="/etc/modules" line={{ item }}
+    with_items:
+      - i2c-bcm2708
+      - i2c-dev
+    notify: reboot
+
+  - name: enable i2c hardware at boot time
+    become: yes
+    lineinfile: path="/boot/config.txt" line={{ item }}
+    with_items:
+      - "dtparam=i2c1=on"
+      - "dtparam=i2c_arm=on"
+    notify: reboot
+
+  - name: install i2c software packages
+    become: yes
+    apt: name={{ item }} state=latest
+    with_items:
+      - python-smbus
+      - i2c-tools
