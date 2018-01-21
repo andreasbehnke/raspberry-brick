@@ -1,0 +1,5 @@
+---
+
+  - name: set hostname to legoberry
+    become: yes
+    hostname: name="legoberry"
