@@ -70,8 +70,8 @@ class MotorHatServer:
         if len(motor_settings) != 4:
             print("ERROR " + client_host + ": client sends wrong number of motor settings, must be 4")
             return "ERROR"
-        index = 0
-        for motor_setting in motor_settings:
+        for index in range(0, 4):
+            motor_setting = motor_settings[index]
             values = motor_setting.split(":")
             if len(values) != 2:
                 print("ERROR " + client_host + ": client sends wrong motor settings format, must be [direction]:[speed]")
@@ -83,7 +83,6 @@ class MotorHatServer:
                 if not direction:
                     raise ValueError
                 self.controllers[index].update(direction, speed)
-                index += 1
             except ValueError:
                 print("ERROR " + client_host + ": client send invalid speed value or direction value [R|F|B]")
                 return "ERROR"
