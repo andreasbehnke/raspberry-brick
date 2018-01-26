@@ -1,3 +1,4 @@
+import argparse
 import socket
 from Adafruit_MotorHAT import Adafruit_MotorHAT
 
@@ -92,5 +93,10 @@ class MotorHatServer:
 
 
 if __name__ == "__main__":
-    server = MotorHatServer()
+    parser = argparse.ArgumentParser(description='Run socket server for listening to moter hat events')
+    parser.add_argument("--host", type=str, help="host name or ip to listen to, default is localhost")
+    parser.add_argument("--port", type=int, help="port to listen to, default is 5005")
+    parser.add_argument("--timeout", type=int, help="client connection timeout, default is 1 second")
+    args = parser.parse_args();
+    server = MotorHatServer(args.host, args.port, args.timeout)
     server.run()
