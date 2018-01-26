@@ -11,12 +11,18 @@
     become: yes
     file: path="/opt/adafruit" state=directory mode=0755
 
+  - name: check if adafruit motor hat repository exists
+    stat: path="/opt/adafruit/Adafruit-Motor-HAT-Python-Library"
+    register: stat_adafruit_motor_hat
+
   - name: clone adafruit repository
     become: yes
     git: repo="https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git" dest="/opt/adafruit/Adafruit-Motor-HAT-Python-Library"
+    when: stat_adafruit_motor_hat.stat.exists == False
 
   - name: run setup for adafruit Library
     become: yes
     command: python setup.py install
     args:
       chdir: /opt/adafruit/Adafruit-Motor-HAT-Python-Library/
+    when: stat_adafruit_motor_hat.stat.exists == False
