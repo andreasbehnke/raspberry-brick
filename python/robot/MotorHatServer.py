@@ -19,6 +19,9 @@ class MotorController:
             self.speed = speed
             self.motor.setSpeed(speed)
 
+    def stop(self):
+        self.update(Adafruit_MotorHAT.RELEASE, 0)
+
 
 class MotorHatServer:
 
@@ -58,6 +61,8 @@ class MotorHatServer:
                 print("WARN " + client_host + ": connection timed out")
             finally:
                 conn.close()
+                for motor_controller in self.controllers:
+                    motor_controller.stop()
             print("INFO " + client_host + ": disconnected")
 
     def dispatch(self, data, client_host):
@@ -72,11 +77,14 @@ class MotorHatServer:
                 print("ERROR " + client_host + ": client sends wrong motor settings format, must be [direction]:[speed]")
                 return "ERROR"
             try:
-                direction = values[0]
+                direction_str = values[0]
                 speed = int(values[1])
-                self.controllers[index].update(self.direction_mapping.get(direction), speed)
+                direction = self.direction_mapping.get(direction_str)
+                if not direction:
+                    raise ValueError
+                self.controllers[index].update(direction, speed)
             except ValueError:
-                print("ERROR " + client_host + ": speed value could not be parsed to int")
+                print("ERROR " + client_host + ": client send invalid speed value or direction value [R|F|B]")
                 return "ERROR"
         return "OK"
 
