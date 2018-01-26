@@ -59,6 +59,8 @@ class MotorHatServer:
                     conn.sendall(self.dispatch(str(data), client_host))
             except socket.timeout:
                 print("WARN " + client_host + ": connection timed out")
+            except socket.error:
+                print("WARN " + client_host + ": socket error")
             finally:
                 conn.close()
                 for motor_controller in self.controllers:
