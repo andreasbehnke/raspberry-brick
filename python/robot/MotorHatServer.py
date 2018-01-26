@@ -31,7 +31,7 @@ class MotorHatServer:
         self.timeout = timeout
         motor_hat = Adafruit_MotorHAT(addr=0x60)
         self.controllers = []
-        for m in range(0, 4):
+        for m in range(1, 4):
             self.controllers.append(MotorController(m, motor_hat))
         self.direction_mapping = {
             "R" : Adafruit_MotorHAT.RELEASE,
