@@ -70,7 +70,7 @@ class MotorHatServer:
         if len(motor_settings) != 4:
             print("ERROR " + client_host + ": client sends wrong number of motor settings, must be 4")
             return "ERROR"
-        for index in range(0, 4):
+        for index in range(0, 3):
             motor_setting = motor_settings[index]
             values = motor_setting.split(":")
             if len(values) != 2:
