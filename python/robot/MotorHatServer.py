@@ -25,7 +25,7 @@ class MotorController:
 
 class MotorHatServer:
 
-    def __init__(self, host = "localhost", port = 5005, timeout = 1):
+    def __init__(self, host="localhost", port=5005, timeout=1):
         self.host = host
         self.port = port
         self.timeout = timeout
@@ -83,6 +83,7 @@ class MotorHatServer:
                 if not direction:
                     raise ValueError
                 self.controllers[index].update(direction, speed)
+                index += 1
             except ValueError:
                 print("ERROR " + client_host + ": client send invalid speed value or direction value [R|F|B]")
                 return "ERROR"
