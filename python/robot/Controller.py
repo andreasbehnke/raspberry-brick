@@ -47,7 +47,7 @@ if __name__ == '__main__':
                 result = s.recv(1024)
                 end = time.time()
                 duration = (end - start) * 1000
-                print result + " " + str(duration) + "ms " + command
+                print(result + " " + str(duration) + "ms " + command)
             command = commandFile.readline()
     s.close()
 
