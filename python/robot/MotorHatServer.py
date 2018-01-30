@@ -4,6 +4,10 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT
 
 
 class MotorController:
+    direction_mapping = {
+        "R": Adafruit_MotorHAT.RELEASE,
+        "F": Adafruit_MotorHAT.FORWARD,
+        "B": Adafruit_MotorHAT.BACKWARD}
 
     def __init__(self, num, motor_hat):
         self.motor = motor_hat.getMotor(num)
@@ -15,7 +19,10 @@ class MotorController:
     def update(self, direction, speed):
         if direction != self.direction:
             self.direction = direction
-            self.motor.run(direction)
+            direction_val = MotorController.direction_mapping.get(direction)
+            if not direction_val:
+                raise ValueError
+            self.motor.run(direction_val)
         if speed != self.speed:
             self.speed = speed
             self.motor.setSpeed(speed)
@@ -34,10 +41,6 @@ class MotorHatServer:
         self.controllers = []
         for m in range(1, 4):
             self.controllers.append(MotorController(m, motor_hat))
-        self.direction_mapping = {
-            "R" : Adafruit_MotorHAT.RELEASE,
-            "F" : Adafruit_MotorHAT.FORWARD,
-            "B" : Adafruit_MotorHAT.BACKWARD}
 
     def run(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -80,11 +83,8 @@ class MotorHatServer:
                 print("ERROR " + client_host + ": client sends wrong motor settings format, must be [direction]:[speed]")
                 return "ERROR"
             try:
-                direction_str = values[0]
+                direction = values[0]
                 speed = int(values[1])
-                direction = self.direction_mapping.get(direction_str)
-                if not direction:
-                    raise ValueError
                 self.controllers[index].update(direction, speed)
             except ValueError:
                 print("ERROR " + client_host + ": client send invalid speed value or direction value [R|F|B]")
