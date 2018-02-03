@@ -1,5 +1,6 @@
 from Adafruit_MotorHAT import Adafruit_MotorHAT
 
+
 class MotorController:
     direction_mapping = {
         "R": Adafruit_MotorHAT.RELEASE,
@@ -10,7 +11,7 @@ class MotorController:
         self.motor = motor_hat.getMotor(num)
         self.motor.run(Adafruit_MotorHAT.RELEASE)
         self.motor.setSpeed(0)
-        self.direction = Adafruit_MotorHAT.RELEASE
+        self.direction = 'R'
         self.speed = 0
 
     def update(self, direction, speed):
