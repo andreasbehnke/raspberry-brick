@@ -1,7 +1,7 @@
 import argparse
 import socket
 from Adafruit_MotorHAT import Adafruit_MotorHAT
-import MotorController
+from MotorController import MotorController
 
 class MotorHatServer:
 
