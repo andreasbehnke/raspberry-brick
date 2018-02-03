@@ -28,7 +28,7 @@ class MotorController:
             self.motor.setSpeed(speed)
 
     def stop(self):
-        self.update(Adafruit_MotorHAT.RELEASE, 0)
+        self.update('R', 0)
 
 
 class MotorHatServer:
