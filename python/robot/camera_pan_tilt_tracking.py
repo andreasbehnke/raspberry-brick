@@ -10,8 +10,9 @@ camera_width = 640
 camera_height = 480
 tilt_area = 50
 tilt_wait = 3
-pan_area = 0
-pan_motor_factor = 150
+pan_area = 0.1
+pan_motor_factor = 130
+pan_min_motor = 25
 
 
 def main():
@@ -93,6 +94,9 @@ def main():
             pan_motor = 0
             if abs(x_rel) > pan_area:
                 pan_motor = x_rel * pan_motor_factor
+            pan_motor_value = abs(pan_motor)
+            if pan_motor_value < pan_min_motor:
+                pan_motor_value = pan_min_motor
 
             # change motor values
             tilt_servo.left(tilt)
@@ -100,11 +104,11 @@ def main():
                 left_motor.update('R', 0)
                 right_motor.update('R', 0)
             elif pan_motor > 0:
-                left_motor.update('F', int(abs(pan_motor)))
-                right_motor.update('B', int(abs(pan_motor)))
+                left_motor.update('F', int(abs(pan_motor_value)))
+                right_motor.update('B', int(abs(pan_motor_value)))
             elif pan_motor < 0:
-                left_motor.update('B', int(abs(pan_motor)))
-                right_motor.update('F', int(abs(pan_motor)))
+                left_motor.update('B', int(abs(pan_motor_value)))
+                right_motor.update('F', int(abs(pan_motor_value)))
         else:
             left_motor.update('R', 0)
             right_motor.update('R', 0)
