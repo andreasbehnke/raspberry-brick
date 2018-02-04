@@ -3,16 +3,16 @@ import argparse
 from RemoteMotorController import RemoteMotorController
 from RemoteMotorHat import RemoteMotorHat
 from LegoServoMotor import LegoServoMotor
+from LegoMotorL import LegoMotorL
 
 
 windows_original = "Original"
 camera_width = 640
 camera_height = 480
-tilt_area = 50
+tilt_area = 70
 tilt_wait = 3
 pan_area = 0.1
 pan_motor_factor = 130
-pan_min_motor = 25
 
 
 def main():
@@ -47,8 +47,8 @@ def main():
     tilt_servo.left(1)
     tilt = 1
     tilt_wait_count = 0
-    left_motor = RemoteMotorController(0, hat)
-    right_motor = RemoteMotorController(1, hat)
+    left_motor = LegoMotorL(RemoteMotorController(0, hat))
+    right_motor = LegoMotorL(RemoteMotorController(1, hat))
 
     while True:
         ret, image = camera.read()
@@ -81,7 +81,7 @@ def main():
                 tilt_wait_count = tilt_wait_count - 1
 
             # tilt control
-            if y < tilt_area and tilt > 0 and tilt_wait_count == 0:
+            if y < tilt_area and tilt > -7 and tilt_wait_count == 0:
                 tilt = tilt - 1
                 tilt_wait_count = tilt_wait
             elif y > camera_height - tilt_area and tilt < 7 and tilt_wait_count == 0:
@@ -94,21 +94,24 @@ def main():
             pan_motor = 0
             if abs(x_rel) > pan_area:
                 pan_motor = x_rel * pan_motor_factor
-            pan_motor_value = abs(pan_motor)
-            if pan_motor_value < pan_min_motor:
-                pan_motor_value = pan_min_motor
+            pan_motor_value = int(abs(pan_motor))
 
             # change motor values
-            tilt_servo.left(tilt)
+            if tilt < 0:
+                tilt_servo.right(abs(tilt))
+            else:
+                tilt_servo.left(tilt)
             if pan_motor == 0:
                 left_motor.update('R', 0)
                 right_motor.update('R', 0)
             elif pan_motor > 0:
-                left_motor.update('F', int(abs(pan_motor_value)))
-                right_motor.update('B', int(abs(pan_motor_value)))
+                # turn right
+                left_motor.update('F', pan_motor_value)
+                right_motor.update('B', pan_motor_value)
             elif pan_motor < 0:
-                left_motor.update('B', int(abs(pan_motor_value)))
-                right_motor.update('F', int(abs(pan_motor_value)))
+                # turn left
+                left_motor.update('B', pan_motor_value)
+                right_motor.update('F', pan_motor_value)
         else:
             left_motor.update('R', 0)
             right_motor.update('R', 0)

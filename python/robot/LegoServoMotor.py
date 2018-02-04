@@ -2,9 +2,6 @@
 Represents a lego servo motor 88004 and allows remote and
 local control using MotorController or RemoteMotorController
 """
-from RemoteMotorHat import RemoteMotorHat
-from RemoteMotorController import RemoteMotorController
-import time
 
 
 class LegoServoMotor:
@@ -25,15 +22,3 @@ class LegoServoMotor:
     '''
     def right(self, step):
         self.motor_controller.update('B', step * 32 + LegoServoMotor.offset)
-
-
-if __name__ == "__main__":
-    hat = RemoteMotorHat(host="legoberry.behnke.net")
-    hat.start()
-    servo = LegoServoMotor(RemoteMotorController(2, hat))
-    for i in range(0, 8):
-        servo.left(i)
-        time.sleep(1)
-    for i in range(0, 8):
-        servo.right(i)
-        time.sleep(1)
