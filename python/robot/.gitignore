@@ -1,3 +1,4 @@
 venv/
 .idea/
 hsv_values.lst
+*.pyc
