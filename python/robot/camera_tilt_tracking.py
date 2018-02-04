@@ -6,6 +6,10 @@ from LegoServoMotor import LegoServoMotor
 
 
 windows_original = "Original"
+camera_width = 640
+camera_height = 480
+tilt_area = 50
+tilt_wait = 3
 
 
 def main():
@@ -38,7 +42,7 @@ def main():
     tilt_servo = LegoServoMotor(RemoteMotorController(2, hat))
     tilt_servo.left(1)
     tilt = 1
-    wait_count = 0
+    tilt_wait_count = 0
 
     while True:
         ret, image = camera.read()
@@ -69,16 +73,17 @@ def main():
 
         cv2.imshow(windows_original, image)
 
-        if wait_count > 0:
-            wait_count = wait_count - 1
-        print("wait:%s" % wait_count)
+        if tilt_wait_count > 0:
+            tilt_wait_count = tilt_wait_count - 1
 
-        if y < 50 and tilt > 0 and wait_count == 0:
+        # tilt control
+
+        if y < tilt_area and tilt > 0 and tilt_wait_count == 0:
             tilt = tilt - 1
-            wait_count = 3
-        elif y > 430 and tilt < 7 and wait_count == 0:
+            tilt_wait_count = tilt_wait
+        elif y > camera_height - tilt_area and tilt < 7 and tilt_wait_count == 0:
             tilt = tilt + 1
-            wait_count = 3
+            tilt_wait_count = tilt_wait
         tilt_servo.left(tilt)
 
         if cv2.waitKey(1) & 0xFF is ord('q'):
