@@ -81,6 +81,8 @@ def main():
         cv2.imshow(windows_original, image)
 
         if cv2.waitKey(1) & 0xFF is ord('q'):
+            with open("hsv_values.lst", "w") as hsv_file:
+                hsv_file.write("%s,%s,%s,%s,%s,%s" % (v1_min, v2_min, v3_min, v1_max, v2_max, v3_max))
             break
 
 
