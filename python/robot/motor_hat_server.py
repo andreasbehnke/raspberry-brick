@@ -9,7 +9,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     host = args.host
     if not host:
-        host = "localhost"
+        host = "0.0.0.0"
     port = args.port
     if not port:
         port = 5005
