@@ -1,5 +1,5 @@
 import argparse
-from motorctrl import *
+from motorctrl.MotorHatServer import MotorHatServer
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run socket server for listening to moter hat events')
