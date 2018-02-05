@@ -1,9 +1,9 @@
 import cv2
 import argparse
-from RemoteMotorController import RemoteMotorController
-from RemoteMotorHat import RemoteMotorHat
-from LegoServoMotor import LegoServoMotor
-from LegoMotorL import LegoMotorL
+from motorctrl.RemoteMotorController import RemoteMotorController
+from motorctrl.RemoteMotorHat import RemoteMotorHat
+from motorctrl.LegoServoMotor import LegoServoMotor
+from motorctrl.LegoMotorL import LegoMotorL
 
 
 windows_original = "Original"
