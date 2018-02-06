@@ -1,0 +1,5 @@
+---
+
+  - name: create symlink to service descriptor
+    become: yes
+    file: state=link src=/opt/lego-berry/python/robot/motorhat.service dest=/etc/systemd/system/motorhat.service

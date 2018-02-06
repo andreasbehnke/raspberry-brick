@@ -1,16 +1,4 @@
 ---
 
-  - name: install git
-    become: yes
-    apt: name={{ item }} state=latest
-    with_items:
-      - git
-
-  - name: check if adafruit motor hat repository exists
-    stat: path="/opt/lego-berry"
-    register: stat_lego_berry
-
-  - name: install lego-berry software - clone repository
-    become: yes
-    git: repo="https://github.com/andreasbehnke/lego-berry.git" dest="/opt/lego-berry"
-    when: stat_lego_berry.stat.exists == False
+  - include: "repository.yml"
+  - include: "motor-hat-service.yml"

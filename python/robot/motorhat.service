@@ -1,0 +1,15 @@
+[Unit]
+Description=Service providing remote access to adafruit motor HAT
+After=syslog.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/opt/lego-berry/robot/python
+ExecStart=/opt/lego-berry/robot/python/motor_hat_service.py
+SyslogIdentifier=motorhat
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=1
