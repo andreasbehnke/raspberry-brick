@@ -4,7 +4,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT
 from MotorController import MotorController
 
 
-class MotorHatServer:
+class MotorHatService:
 
     def __init__(self, host="localhost", port=5005, timeout=1):
         self.host = host

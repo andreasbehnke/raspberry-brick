@@ -1,5 +1,5 @@
 import argparse
-from motorctrl.MotorHatServer import MotorHatServer
+from motorctrl.MotorHatService import MotorHatService
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run socket server for listening to moter hat events')
@@ -16,5 +16,5 @@ if __name__ == "__main__":
     timeout = args.timeout
     if not timeout:
         timeout = 1
-    server = MotorHatServer(host, port, timeout)
+    server = MotorHatService(host, port, timeout)
     server.run()

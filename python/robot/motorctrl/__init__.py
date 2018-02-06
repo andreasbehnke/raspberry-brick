@@ -1,1 +1,1 @@
-__all__ = ["MotorController", "MotorHatServer"]
+__all__ = ["MotorController", "MotorHatService.py"]
