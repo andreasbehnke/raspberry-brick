@@ -1,6 +1,6 @@
 [Unit]
 Description=Service providing remote access to adafruit motor HAT
-After=syslog.target
+After=network.target
 
 [Service]
 Type=simple
