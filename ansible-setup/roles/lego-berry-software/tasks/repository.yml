@@ -6,11 +6,6 @@
     with_items:
       - git
 
-  - name: check if lego-berry repository exists
-    stat: path="/opt/lego-berry"
-    register: stat_lego_berry
-
   - name: install lego-berry software - clone repository
     become: yes
     git: repo="https://github.com/andreasbehnke/lego-berry.git" dest="/opt/lego-berry"
-    when: stat_lego_berry.stat.exists == False
