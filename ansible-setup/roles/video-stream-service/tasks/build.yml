@@ -1,0 +1,15 @@
+---
+
+  - name: install build dependencies
+    become: yes
+    apt: name={{ item }} state=latest
+    with_items:
+      - cmake
+      - libjpeg8-dev
+
+  - name: make mjpg-streamer
+    make: chdir=/home/pi/mjpg-streamer/mjpg-streamer-experimental
+
+  - name: make mjpg-streamer
+    become: yes
+    make: chdir=/home/pi/mjpg-streamer/mjpg-streamer-experimental target=install

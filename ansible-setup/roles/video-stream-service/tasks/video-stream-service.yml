@@ -1,0 +1,9 @@
+---
+
+  - name: mjpeg streamer service descriptor
+    become: yes
+    copy: src="mjpeg_streamer.service" dest="/etc/systemd/system/mjpeg_streamer.service"
+
+  - name: enable and start mjpeg streamer service
+    become: yes
+    service: name=mjpeg_streamer enabled=yes state=started
