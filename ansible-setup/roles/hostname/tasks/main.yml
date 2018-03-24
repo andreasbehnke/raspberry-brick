@@ -3,3 +3,7 @@
   - name: set hostname to legoberry
     become: yes
     hostname: name="legoberry"
+
+  - name: add hostname to hosts file, required by some application which try to resove local hostname by dns
+    become: yes
+    lineinfile: dest="/etc/hosts" line="127.0.1.1	legoberry"

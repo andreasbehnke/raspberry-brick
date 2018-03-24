@@ -8,3 +8,4 @@
     - i2c
     - adafruit-motor-hat
     - lego-berry-software
+    - video-stream-service

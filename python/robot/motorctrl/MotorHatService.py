@@ -1,5 +1,6 @@
 
 import socket
+import sys
 from Adafruit_MotorHAT import Adafruit_MotorHAT
 from MotorController import MotorController
 
@@ -16,6 +17,8 @@ class MotorHatService:
             self.controllers.append(MotorController(m, motor_hat))
 
     def run(self):
+        print("INFO starting motorhat service @" + self.host + ":" + str(self.port))
+        sys.stdout.flush()
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((self.host, self.port))
@@ -23,16 +26,17 @@ class MotorHatService:
 
         while 1:
             print("INFO waiting for connection")
+            sys.stdout.flush()
             conn, address = s.accept()
             client_host = address[0]
             conn.settimeout(self.timeout)
             print("INFO " + client_host + ": connected")
+            sys.stdout.flush()
             try:
                 while 1:
                     data = conn.recv(1024)
                     if not data:
                         break;
-                    print("INFO " + client_host + ": received data: " + str(data))
                     conn.sendall(self.dispatch(str(data), client_host))
             except socket.timeout:
                 print("WARN " + client_host + ": connection timed out")
@@ -43,6 +47,7 @@ class MotorHatService:
                 for motor_controller in self.controllers:
                     motor_controller.stop()
             print("INFO " + client_host + ": disconnected")
+            sys.stdout.flush()
 
     def dispatch(self, data, client_host):
         motor_settings = data.split(",")
