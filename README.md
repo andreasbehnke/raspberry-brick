@@ -16,6 +16,7 @@ Use raspberry pi for controlling lego power function models using any programmin
  * download raspbian lite: https://downloads.raspberrypi.org/raspbian_lite_latest
  * write image to SD card
  * place WIFI pre configuration file before first boot /boot/wpa_supplicant.conf:
+   (you can find pre configuration file examples in folder pre-setup)
 
   ```
   country=US
