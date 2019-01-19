@@ -98,13 +98,13 @@ def main():
 
             forward_speed = 0
             if radius < max_object_radius:
-                forward_speed = int(((max_object_radius - radius) / max_object_radius) * -200)
+                forward_speed = int(((max_object_radius - radius) / max_object_radius) * 200)
 
             # change motor values
             print("forward_speed:%.0f" % forward_speed, "pan_motor:%.0f" % pan_motor)
 
             left_motor.drive(int(pan_motor) + forward_speed)
-            right_motor.drive(min(0, int(pan_motor) * -1 + forward_speed))
+            right_motor.drive(int(pan_motor) * -1 + forward_speed)
 
             if tilt < 0:
                 tilt_servo.right(abs(tilt))
