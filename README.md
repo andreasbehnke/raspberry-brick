@@ -28,4 +28,11 @@ Use raspberry pi for controlling lego power function models using any programmin
     psk="your pre shared key"
   }
   ```
+  for details on this configuration: https://weworkweplay.com/play/automatically-connect-a-raspberry-pi-to-a-wifi-network/
  * place empty SSH file in /boot/ssh to enable ssh after boot
+
+ ## Configuration of raspberry pi using Ansible
+
+ * TODO: Install ansible
+ * first login with default pw to retrieve host key: ```ssh pi@raspberrypi.behnke.net``` password: raspberry
+ *
