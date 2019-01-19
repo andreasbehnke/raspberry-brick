@@ -1,0 +1,9 @@
+---
+
+  - name: enable camera hardware
+    become: yes
+    lineinfile: path="/boot/config.txt" line={{ item }}
+    with_items:
+      - "start_x=1"
+      - "gpu_mem=128"
+    notify: reboot

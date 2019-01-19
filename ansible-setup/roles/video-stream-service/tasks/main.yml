@@ -1,5 +1,6 @@
 ---
 
+  - include: "camera.yml"
   - include: "repository.yml"
   - include: "build.yml"
   - include: "video-stream-service.yml"
