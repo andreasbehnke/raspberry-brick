@@ -13,7 +13,7 @@ Use raspberry pi for controlling lego power function models using any programmin
 
 ## Pre Configuration
 
- * download raspbian lite: https://downloads.raspberrypi.org/raspbian_lite_latest
+ * download latest raspios lite image from https://www.raspberrypi.com/software/operating-systems/
  * write image to SD card
  * place WIFI pre configuration file before first boot /boot/wpa_supplicant.conf:
    (you can find pre configuration file examples in folder pre-setup)
@@ -28,7 +28,7 @@ Use raspberry pi for controlling lego power function models using any programmin
     psk="your pre shared key"
   }
   ```
-  for details on this configuration: https://weworkweplay.com/play/automatically-connect-a-raspberry-pi-to-a-wifi-network/
+  for details on this configuration: https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi
  * place empty SSH file in /boot/ssh to enable ssh after boot
 
  ## Configuration of raspberry pi using Ansible
