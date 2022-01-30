@@ -1,8 +1,0 @@
----
-
-  - name: reboot
-    become: yes
-    command: /sbin/shutdown -r +1
-    async: 0
-    poll: 0
-    ignore_errors: true

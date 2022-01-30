@@ -1,9 +1,9 @@
 ---
 
-  - name: mjpeg streamer service descriptor
+  - name: camera video stream service descriptor
     become: yes
-    copy: src="mjpeg_streamer.service" dest="/etc/systemd/system/mjpeg_streamer.service"
+    copy: src="camera_stream.service" dest="/etc/systemd/system/camera_stream.service"
 
-  - name: enable and start mjpeg streamer service
+  - name: enable and start camera video stream service
     become: yes
-    service: name=mjpeg_streamer enabled=yes state=started
+    service: name=camera_stream enabled=yes state=started

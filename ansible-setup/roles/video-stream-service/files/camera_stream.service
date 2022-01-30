@@ -1,0 +1,18 @@
+[Unit]
+Description=Provides camera video stream at network tcp port
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=60
+
+[Service]
+User=pi
+Group=pi
+
+# After client disconnects from TCP port, libcamera-vid will stop with an error. 
+# Configure it to restart to be ready for next client connection.
+Restart=on-failure
+RestartSec=1s
+ExecStart=/usr/bin/libcamera-vid -t 0 --inline --listen -o tcp://0.0.0.0:3000
+
+[Install]
+WantedBy=multi-user.target
